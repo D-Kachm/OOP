@@ -2,6 +2,11 @@
 #include <fstream>
 #include "price.h"
 
+Price add(const Price& p1, const Price& p2);
+Price multiply(const Price& p, int quantity);
+void round(Price& p);
+void display(const Price& p);
+
 int main() {
     std::ifstream file("prices.txt");
     if (!file) {
@@ -9,23 +14,23 @@ int main() {
         return 1;
     }
 
-    Price total(0, 0);
+    Price total = {0, 0};
     int hryvnias, quantity;
     short kopiykas;
 
     while (file >> hryvnias >> kopiykas >> quantity) {
-        Price item_price(hryvnias, kopiykas);
-        total = total + (item_price * quantity);
+        Price item_price = {hryvnias, kopiykas};
+        total = add(total, multiply(item_price, quantity));
     }
     file.close();
 
     std::cout << "Total price: ";
-    total.display();
+    display(total);
     std::cout << std::endl;
 
-    total.round();
+    round(total);
     std::cout << "Amount to be paid (rounded): ";
-    total.display();
+    display(total);
     std::cout << std::endl;
 
     return 0;

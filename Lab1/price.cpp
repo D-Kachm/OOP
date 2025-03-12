@@ -1,30 +1,32 @@
 #include "price.h"
+#include <iostream>
 
-Price::Price(int h, short k) : hryvnias(h), kopiykas(k) {}
-
-Price Price::operator+(const Price& other) const {
-    int total_kop = (hryvnias + other.hryvnias) * 100 + (kopiykas + other.kopiykas);
-    return Price(total_kop / 100, total_kop % 100);
+Price add(const Price& p1, const Price& p2) {
+    Price result;
+    result.kopiykas = p1.kopiykas + p2.kopiykas;
+    result.hryvnias = p1.hryvnias + p2.hryvnias + result.kopiykas / 100;
+    result.kopiykas %= 100;
+    return result;
 }
 
-Price Price::operator*(int quantity) const {
-    int total_kop = (hryvnias * 100 + kopiykas) * quantity;
-    return Price(total_kop / 100, total_kop % 100);
+Price multiply(const Price& p, int quantity) {
+    int total_kop = (p.hryvnias * 100 + p.kopiykas) * quantity;
+    Price result;
+    result.hryvnias = total_kop / 100;
+    result.kopiykas = total_kop % 100;
+    return result;
 }
 
-void Price::round() {
-    int remainder = kopiykas % 10;
-    if (remainder < 5) {
-        kopiykas -= remainder;
-    } else {
-        kopiykas += (10 - remainder);
+void round(Price& p) {
+    int remainder = p.kopiykas % 10;
+    p.kopiykas -= remainder;
+    if (remainder >= 5) p.kopiykas += 10;
+    if (p.kopiykas >= 100) {
+        p.hryvnias += p.kopiykas / 100;
+        p.kopiykas %= 100;
     }
-    if (kopiykas >= 100) {
-        hryvnias += kopiykas / 100;
-        kopiykas %= 100;
-    }
 }
 
-void Price::display() const {
-    std::cout << hryvnias << " UAH " << kopiykas << " kop";
+void display(const Price& p) {
+    std::cout << p.hryvnias << " UAH " << p.kopiykas << " kop";
 }
