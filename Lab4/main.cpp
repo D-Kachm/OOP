@@ -1,12 +1,19 @@
 #include <iostream>
 using namespace std;
 
+int instrumentDestructorsCalled = 0;
+
 class Instrument {
     string material;
     int volume;
     string sound;
 
 public:
+    virtual ~Instrument() {
+        instrumentDestructorsCalled++;
+        cout << "Instrument destructor called. Count: " << instrumentDestructorsCalled << endl;
+    }
+
     int SetMaterial(string m) {
         material = m;
         return 1;
@@ -109,4 +116,5 @@ public:
 
 int main() {
     Player* rockstar = new Player("Yamaha", "Andrew", "rock");
+    delete rockstar;
 }
