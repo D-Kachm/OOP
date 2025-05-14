@@ -88,8 +88,31 @@ public:
     }
 };
 
-// Множинне успадкування від Guitar і Piano
-class MultiInstrument : public Guitar, public Piano {
+class Violin : virtual public Instrument {
+public:
+    Violin() {
+        cout << "Violin constructor\n";
+        SetMaterial("wood");
+        SetVolume(50);
+        SetSound("classical chord");
+        Describe();
+        Play();
+    }
+
+    virtual ~Violin() {
+        cout << "Piano destructor\n";
+    }
+
+    int Play() {
+        cout << "Wee-Wee-Wee!" << endl;
+        return 1;
+    }
+};
+
+
+
+// Множинне успадкування від Guitar і Piano і Violin
+class MultiInstrument : public Guitar, public Piano, public Violin {
 public:
     MultiInstrument() {
         cout << "MultiInstrument constructor\n";
@@ -102,6 +125,7 @@ public:
     int PlayAll() {
         Guitar::Play();
         Piano::Play();
+        Violin::Play();
         return 1;
     }
 };
