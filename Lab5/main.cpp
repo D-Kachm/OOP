@@ -78,7 +78,7 @@ public:
         Play();
     }
 
-    virtual ~Piano() {
+     ~Piano() {
         cout << "Piano destructor\n";
     }
 
