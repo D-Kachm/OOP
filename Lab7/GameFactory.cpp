@@ -15,7 +15,7 @@ public:
 class Elf : public Character {
 public:
     Elf() : Character("Elf") {}
-    void display() override {
+    void display() {
         cout << "Created character: " << name << " " << endl;
     }
 };
@@ -23,9 +23,10 @@ public:
 class Orc : public Character {
 public:
     Orc() : Character("Orc") {}
-    void display() override {
+    void display() {
         cout << "Created character: " << name << " " << endl;
     }
+   
 };
 
 // Базовий клас зброї
@@ -40,7 +41,7 @@ public:
 class Bow : public Weapon {
 public:
     Bow() : Weapon("Bow") {}
-    void show() override {
+    void show() {
         cout << "Equipped weapon: " << type << " " << endl;
     }
 };
@@ -48,7 +49,7 @@ public:
 class Axe : public Weapon {
 public:
     Axe() : Weapon("Axe") {}
-    void show() override {
+    void show() {
         cout << "Equipped weapon: " << type << " " << endl;
     }
 };
@@ -69,15 +70,27 @@ public:
     Weapon* createWeapon() override {
         return new Bow();
     }
+    if () {
+        delete
+        {
+            /* code */
+        }
+        
+    }
 };
 
-class OrcFactory : public GameFactory {
+class OrcFactory : public GameFactory{
 public:
     Character* createCharacter() override {
         return new Orc();
     }
+    
     Weapon* createWeapon() override {
         return new Axe();
+    }
+    
+    ~OrcFactory() {
+        
     }
 };
 

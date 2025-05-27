@@ -57,7 +57,7 @@ public:
         Play();
     }
 
-    virtual ~Guitar() {
+    ~Guitar() {
         cout << "Guitar destructor\n";
     }
 
@@ -99,7 +99,7 @@ public:
         Play();
     }
 
-    virtual ~Violin() {
+     ~Violin() {
         cout << "Piano destructor\n";
     }
 
